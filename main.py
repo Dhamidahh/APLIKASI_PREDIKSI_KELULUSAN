@@ -79,7 +79,7 @@ if (selected == 'SEMESTER 1'):
 
         SEMESTER_1_prediction = SEMESTER_1.predict([[Fisika_Dasar_1, Kalkulus_1, Kimia_Dasar, Material_Teknik, Pengantar_Teknik_Industri, Menggambar_Teknik, Praktikum_Menggambar_Teknik, Logika_Pemrograman]])
 
-        if SEMESTER_1_prediction[0] == 1:
+        if SEMESTER_1_prediction[0] == 0:
             SEMESTER_1_PREDICTION = 'KAMU DIPREDIKSI LULUS TIDAK TEPAT WAKTU!'
             MOTIVASI = (
                 ' Jangan patah semangat, terus perbaiki nilaimu. Ini baru semester 1 dan harus cepat beradaptasi. '
@@ -152,7 +152,7 @@ if (selected == 'SEMESTER 2'):
                                                      Aljabar_Linear, Fisika_Dasar_2, Kalkulus_2, Mekanika_Teknik, Praktikum_Fisika_Dasar,
                                                      Proses_Manufaktur, Ekologi_Industri, Praktikum_Proses_Manufaktur]])
 
-        if SEMESTER_2_prediction[0] == 0:
+        if SEMESTER_2_prediction[0] == 1:
             SEMESTER_2_PREDICTION = 'KAMU DIPREDIKSI LULUS TIDAK TEPAT WAKTU!'
             MOTIVASI = (
                 ' Jangan patah semangat, terus perbaiki nilaimu.'
@@ -835,7 +835,7 @@ if (selected == 'SEMESTER 7'):
               Praktikum_Terintegarasi, Kerja_Praktek, Ekonomika_dan_Ekonomi_Teknik,
               Perancangan_dan_Manajemen_Organisasi_Industri, Metodologi_Penelitian, Perancangan_Sistem_Terpadu]])
 
-        if SEMESTER_7_prediction[0] == 1:
+        if SEMESTER_7_prediction[0] == 0:
             SEMESTER_7_PREDICTION = 'KAMU DIPREDIKSI LULUS TIDAK TEPAT WAKTU!'
             MOTIVASI = (
                 ' Mungkin akan sedikit terlambat, tapi pelan pelan kamu pasti bisa mencapai titik akhir.'
