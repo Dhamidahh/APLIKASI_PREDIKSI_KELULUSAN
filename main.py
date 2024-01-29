@@ -61,7 +61,7 @@ if (selected == 'SEMESTER 1'):
 
     # Creating a button for prediction
 
-    if st.button('Klasifikasi KELULUSAN'):
+    if st.button('Klasifikasi Kelulusan'):
         if 'name' in st.session_state:
             st.write(f"Halo {st.session_state.name}!")
 
@@ -123,7 +123,7 @@ if (selected == 'SEMESTER 2'):
 
     # Creating a button for prediction
 
-    if st.button('Klasifikasi KELULUSAN'):
+    if st.button('Klasifikasi Kelulusan'):
         if 'name' in st.session_state:
             st.write(f"Halo {st.session_state.name}!")
 
@@ -206,7 +206,7 @@ if (selected == 'SEMESTER 3'):
 
     # Creating a button for prediction
 
-    if st.button('Klasifikasi KELULUSAN'):
+    if st.button('Klasifikasi Kelulusan'):
         if 'name' in st.session_state:
             st.write(f"Halo {st.session_state.name}!")
 
@@ -305,7 +305,7 @@ if (selected == 'SEMESTER 4'):
 
     # Creating a button for prediction
 
-    if st.button('Klasifikasi KELULUSAN'):
+    if st.button('Klasifikasi Kelulusan'):
         if 'name' in st.session_state:
             st.write(f"Halo {st.session_state.name}!")
 
@@ -421,7 +421,7 @@ if (selected == 'SEMESTER 5'):
 
     # Creating a button for prediction
 
-    if st.button('Klasifikasi KELULUSAN'):
+    if st.button('Klasifikasi Kelulusan'):
         if 'name' in st.session_state:
             st.write(f"Halo {st.session_state.name}!")
 
@@ -590,7 +590,7 @@ if (selected == 'SEMESTER 6'):
 
     # Creating a button for prediction
 
-    if st.button('Klasifikasi KELULUSAN'):
+    if st.button('Klasifikasi Kelulusan'):
         if 'name' in st.session_state:
             st.write(f"Halo {st.session_state.name}!")
 
@@ -769,7 +769,7 @@ if (selected == 'SEMESTER 7'):
 
     # Creating a button for prediction
 
-    if st.button('Klasifikasi KELULUSAN'):
+    if st.button('Klasifikasi Kelulusan'):
         if 'name' in st.session_state:
             st.write(f"Halo {st.session_state.name}!")
 
