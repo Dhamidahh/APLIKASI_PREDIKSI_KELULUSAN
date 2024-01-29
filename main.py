@@ -1,3 +1,4 @@
+
 import joblib
 import streamlit as st
 from streamlit_option_menu import option_menu
@@ -25,22 +26,27 @@ if NIM:
     st.session_state.age = NIM
 
 SEMESTER_1 = joblib.load('MODEL_SEMESTER1_RF.pkl')
-SEMESTER_2 = joblib.load('MODEL_SEMESTER2_RF.pkl')
-SEMESTER_3 = joblib.load('MODEL_SEMESTER3_RF.pkl')
-SEMESTER_4 = joblib.load('MODEL_SEMESTER4_RF.pkl')
+SEMESTER_2 = joblib.load('MODEL_SEMESTER2_SVM.pkl')
+SEMESTER_3 = joblib.load('MODEL_SEMESTER3_XGB.pkl')
+SEMESTER_4 = joblib.load('MODEL_SEMESTER4_LR.pkl')
 SEMESTER_5 = joblib.load('MODEL_SEMESTER5_RF.pkl')
-SEMESTER_6 = joblib.load('MODEL_SEMESTER6_RF.pkl')
-SEMESTER_7 = joblib.load('MODEL_SEMESTER7_RF.pkl')
+SEMESTER_6 = joblib.load('MODEL_SEMESTER6_DT.pkl')
+SEMESTER_7 = joblib.load('MODEL_SEMESTER7_XGB.pkl')
 
 # Sidebar for navigation
-with st.sidebar:
-    selected = option_menu('Prediksi Kelulusan Mahasiswa Teknik Industri UNTIRTA',['SEMESTER 1', 'SEMESTER 2', 'SEMESTER 3', 'SEMESTER 4',
-  'SEMESTER 5', 'SEMESTER 6', 'SEMESTER 7'], default_index=0)
 
-#Prediction Page
+with st.sidebar:
+    selected = option_menu('Prediksi Kelulusan Mahasiswa Teknik Industri UNTIRTA',
+                           ['SEMESTER 1', 'SEMESTER 2', 'SEMESTER 3', 'SEMESTER 4',
+                                    'SEMESTER 5', 'SEMESTER 6', 'SEMESTER 7'],
+                           default_index=0)
+
+# Diabetes Prediction Page
 if (selected == 'SEMESTER 1'):
+
     # Page title
     st.title('Prediksi Kelulusan Mahasiswa Semester 1 Teknik Industri UNTIRTA')
+
     Fisika_Dasar_1 = st.selectbox('Fisika Dasar 1', ('4.00','3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
     Kalkulus_1 = st.selectbox('Kalkulus 1', ('4.00','3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
     Kimia_Dasar = st.selectbox('Kimia Dasar', ('4.00','3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
@@ -54,6 +60,7 @@ if (selected == 'SEMESTER 1'):
     SEMESTER_1_PREDICTION = ''
 
     # Creating a button for prediction
+
     if st.button('PREDIKSI KELULUSAN'):
         if 'name' in st.session_state:
             st.write(f"Halo {st.session_state.name}!")
@@ -72,7 +79,7 @@ if (selected == 'SEMESTER 1'):
 
         SEMESTER_1_prediction = SEMESTER_1.predict([[Fisika_Dasar_1, Kalkulus_1, Kimia_Dasar, Material_Teknik, Pengantar_Teknik_Industri, Menggambar_Teknik, Praktikum_Menggambar_Teknik, Logika_Pemrograman]])
 
-        if SEMESTER_1_prediction[0] == 0:
+        if SEMESTER_1_prediction[0] == 1:
             SEMESTER_1_PREDICTION = 'LULUS TIDAK TEPAT WAKTU'
             MOTIVASI = (
                 'Jangan patah semangat, terus perbaiki nilaimu. Ini baru semester 1 dan harus cepat beradaptasi.'
@@ -163,9 +170,7 @@ if (selected == 'SEMESTER 2'):
 
 if (selected == 'SEMESTER 3'):
 
-    
-
-# Page title
+    # Page title
     st.title('Prediksi Kelulusan Mahasiswa SEMESTER 3 Teknik Industri UNTIRTA')
 
     Fisika_Dasar_1 = st.selectbox('Fisika Dasar 1', ('4.00','3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
@@ -711,7 +716,8 @@ if (selected == 'SEMESTER 7'):
                                     ('4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
     Penelitian_Operasional_2 = st.selectbox('Penelitian Operasional 2',
                                             ('4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
-    Pengendalian_dan_Penjaminan_Mutu = st.selectbox('Pengendalian dan Penjaminan Mutu', ('4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
+    Pengendalian_dan_Penjaminan_Mutu = st.selectbox('Pengendalian dan Penjaminan Mutu', (
+    '4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
     Analitika_Data = st.selectbox('Analitika Data',
                                   ('4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
     Ergonomi_2 = st.selectbox('Ergonomi 2', ('4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
@@ -720,17 +726,20 @@ if (selected == 'SEMESTER 7'):
         ('4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
     Statistika_2 = st.selectbox('Statistika 2',
                                 ('4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
-    Keselamatan_dan_Keamanan_Kerja = st.selectbox('Keselamatan dan Keamanan Kerja', ('4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
+    Keselamatan_dan_Keamanan_Kerja = st.selectbox('Keselamatan dan Keamanan Kerja', (
+    '4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
     Perancangan_dan_Pengembangan_Produk = st.selectbox('Perancangan dan Pengembangan Produk', (
     '4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
-    Perancangan_Tata_Letak_Fasilitas = st.selectbox('Perancangan Tata Letak Fasilitas', ('4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
+    Perancangan_Tata_Letak_Fasilitas = st.selectbox('Perancangan Tata Letak Fasilitas', (
+    '4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
     Simulasi_Sistem = st.selectbox('Simulasi Sistem',
                                    ('4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
     Sistem_Produksi = st.selectbox('Sistem Produksi',
                                    ('4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
     Perilaku_Organisasi = st.selectbox('Perilaku Organisasi',
-                                       ('4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', ‘0.00'))
-    Praktikum_Tata_Letak_Fasilitas = st.selectbox('Praktikum Tata Letak Fasilitas', ('4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
+                                       ('4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
+    Praktikum_Tata_Letak_Fasilitas = st.selectbox('Praktikum Tata Letak Fasilitas', (
+    '4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
     Praktikum_Terintegarasi = st.selectbox('Praktikum Terintegrasi',
                                            ('4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
     Kerja_Praktek = st.selectbox('Kerja Praktek', (
@@ -784,7 +793,7 @@ if (selected == 'SEMESTER 7'):
         Penelitian_Operasional_2 = float(Penelitian_Operasional_2)
         Pengendalian_dan_Penjaminan_Mutu = float(Pengendalian_dan_Penjaminan_Mutu)
         Analitika_Data = float(Analitika_Data)
- Praktikum_Analisis_dan_Perancangan_Sistem_Informasi = float(Praktikum_Analisis_dan_Perancangan_Sistem_Informasi)
+        Praktikum_Analisis_dan_Perancangan_Sistem_Informasi = float(Praktikum_Analisis_dan_Perancangan_Sistem_Informasi)
         Statistika_2 = float(Statistika_2)
         Ergonomi_2 = float(Ergonomi_2)
         Keselamatan_dan_Keamanan_Kerja = float(Keselamatan_dan_Keamanan_Kerja)
@@ -797,7 +806,7 @@ if (selected == 'SEMESTER 7'):
         Praktikum_Terintegarasi = float(Praktikum_Terintegarasi)
         Kerja_Praktek = float(Kerja_Praktek)
         Ekonomika_dan_Ekonomi_Teknik = float(Ekonomika_dan_Ekonomi_Teknik)
- Perancangan_dan_Manajemen_Organisasi_Industri = float(Perancangan_dan_Manajemen_Organisasi_Industri)
+        Perancangan_dan_Manajemen_Organisasi_Industri = float(Perancangan_dan_Manajemen_Organisasi_Industri)
         Metodologi_Penelitian = float(Metodologi_Penelitian)
         Perancangan_Sistem_Terpadu = float(Perancangan_Sistem_Terpadu)
 
@@ -810,17 +819,23 @@ if (selected == 'SEMESTER 7'):
               Ergonomi_1, Kalkulus_3, Statistika_1, Analisis_dan_Perancangan_Sistem_Informasi,
               Pemodelan_Sistem, Penelitian_Operasional_2, Pengendalian_dan_Penjaminan_Mutu,
               Analitika_Data, Praktikum_Analisis_dan_Perancangan_Sistem_Informasi, Statistika_2, Ergonomi_2,
-Keselamatan_dan_Keamanan_Kerja, Perancangan_dan_Pengembangan_Produk, Perancangan_Tata_Letak_Fasilitas,Simulasi_Sistem, Sistem_Produksi, Perilaku_Organisasi, Praktikum_Tata_Letak_Fasilitas, Praktikum_Terintegarasi, Kerja_Praktek, Ekonomika_dan_Ekonomi_Teknik,
+              Keselamatan_dan_Keamanan_Kerja, Perancangan_dan_Pengembangan_Produk, Perancangan_Tata_Letak_Fasilitas,
+              Simulasi_Sistem, Sistem_Produksi, Perilaku_Organisasi, Praktikum_Tata_Letak_Fasilitas,
+              Praktikum_Terintegarasi, Kerja_Praktek, Ekonomika_dan_Ekonomi_Teknik,
               Perancangan_dan_Manajemen_Organisasi_Industri, Metodologi_Penelitian, Perancangan_Sistem_Terpadu]])
-        if SEMESTER_7_prediction[0] == 0:
+
+        if SEMESTER_7_prediction[0] == 1:
             SEMESTER_7_PREDICTION = 'LULUS TIDAK TEPAT WAKTU'
             MOTIVASI = (
                 'Mungkin akan sedikit terlambat, tapi pelan pelan kamu pasti bisa mencapai titik akhir'
                 '"Mau tidak mau kita harus segera menyelesaikan kuliah agar tidak memberatkan biaya"')
+
         else:
             SEMESTER_7_PREDICTION = 'LULUS TEPAT WAKTU'
             MOTIVASI = (
                 'Sudah hampir sedikit lagi selesai. Bukalah Laptop dan Kerjakan Skripsimu'
                 'Akhir yang indah dengan gelar di belakang nama, siap menantimu!!')
+
         pesan_hasil = f'{SEMESTER_7_PREDICTION}, {MOTIVASI}'
+
         st.success(pesan_hasil)
