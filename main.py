@@ -4,7 +4,7 @@ from streamlit_option_menu import option_menu
 from PIL import Image
 
 # Judul aplikasi
-st.title('Aplikasi Klasifikasi Kelulusan Mahasiswa TI UNTIRTA')
+st.title('Klasifikasi Kelulusan Mahasiswa TI UNTIRTA')
 
 # Masukkin gambar
 st.subheader('Keterangan Nilai Bobot Mata Kuliah')
@@ -25,13 +25,12 @@ if NIM:
     st.session_state.age = NIM
 
 SEMESTER_1 = joblib.load('MODEL_SEMESTER1_RF.pkl')
-SEMESTER_2 = joblib.load('MODEL_SEMESTER2_SVM.pkl')
-SEMESTER_3 = joblib.load('MODEL_SEMESTER3_XGB.pkl')
-SEMESTER_4 = joblib.load('MODEL_SEMESTER4_LR.pkl')
+SEMESTER_2 = joblib.load('MODEL_SEMESTER2_RF.pkl')
+SEMESTER_3 = joblib.load('MODEL_SEMESTER3_RF.pkl')
+SEMESTER_4 = joblib.load('MODEL_SEMESTER4_RF.pkl')
 SEMESTER_5 = joblib.load('MODEL_SEMESTER5_RF.pkl')
-SEMESTER_6 = joblib.load('MODEL_SEMESTER6_DT.pkl')
+SEMESTER_6 = joblib.load('MODEL_SEMESTER6_RF.pkl')
 SEMESTER_7 = joblib.load('MODEL_SEMESTER7_RF.pkl')
-
 
 # Sidebar for navigation
 
@@ -61,7 +60,7 @@ if (selected == 'SEMESTER 1'):
 
     # Creating a button for prediction
 
-    if st.button('Klasifikasi Kelulusan'):
+    if st.button('KLASIFIKASI KELULUSAN'):
         if 'name' in st.session_state:
             st.write(f"Halo {st.session_state.name}!")
 
@@ -79,15 +78,16 @@ if (selected == 'SEMESTER 1'):
 
         SEMESTER_1_prediction = SEMESTER_1.predict([[Fisika_Dasar_1, Kalkulus_1, Kimia_Dasar, Material_Teknik, Pengantar_Teknik_Industri, Menggambar_Teknik, Praktikum_Menggambar_Teknik, Logika_Pemrograman]])
 
-        if SEMESTER_1_prediction[0] == 0:
+        if SEMESTER_1_prediction[0] == 1:
             SEMESTER_1_PREDICTION = 'KAMU TERMASUK KLASIFIKASI MAHASISWA LULUS TIDAK TEPAT WAKTU!'
             MOTIVASI = (
                 ' Jangan patah semangat, terus perbaiki nilaimu. Ini baru semester 1 dan harus cepat beradaptasi. '
                 'Jika kamu malas dan hanya membuang-buang waktu, kamu tak akan tahu bagaimana cara merengkuh peluang bahkan ketika peluang itu tepat berada di hadapan kamu.')
             img3 = Image.open('SYARAT NILAI.jpg')
-            st.image(img3, use_column_width=True)        
+            st.image(img3, use_column_width=True)
+
         else:
-            SEMESTER_1_PREDICTION = 'SELAMAT, KAMU TERMASUK KLASIFIKASI MAHASISWA LULUS TEPAT WAKTU!!'
+            SEMESTER_1_PREDICTION = 'SELAMAT KAMU TERMASUK KLASIFIKASI LULUS TEPAT WAKTU!'
             MOTIVASI = (
                 ' Kamu telah melalui lebih dari 20 sks dengan baik. Pertahankan dan tingkatkan kembali nilai-nilai di semester kedepan. '
                 'Kamu bisa mengambil lebih dari 20 sks untuk semester 2. Tidak apa-apa untuk merayakan kesuksesan, tapi lebih penting untuk memperhatikan pelajaran tentang kegagalan.')
@@ -123,7 +123,7 @@ if (selected == 'SEMESTER 2'):
 
     # Creating a button for prediction
 
-    if st.button('Klasifikasi Kelulusan'):
+    if st.button('KLASIFIKASI KELULUSAN'):
         if 'name' in st.session_state:
             st.write(f"Halo {st.session_state.name}!")
 
@@ -152,7 +152,7 @@ if (selected == 'SEMESTER 2'):
                                                      Aljabar_Linear, Fisika_Dasar_2, Kalkulus_2, Mekanika_Teknik, Praktikum_Fisika_Dasar,
                                                      Proses_Manufaktur, Ekologi_Industri, Praktikum_Proses_Manufaktur]])
 
-        if SEMESTER_2_prediction[0] == 1:
+        if SEMESTER_2_prediction[0] == 0:
             SEMESTER_2_PREDICTION = 'KAMU TERMASUK KLASIFIKASI MAHASISWA LULUS TIDAK TEPAT WAKTU!'
             MOTIVASI = (
                 ' Jangan patah semangat, terus perbaiki nilaimu.'
@@ -163,7 +163,7 @@ if (selected == 'SEMESTER 2'):
             img3 = Image.open('SYARAT NILAI.jpg')
             st.image(img3, use_column_width=True) 
         else:
-            SEMESTER_2_PREDICTION = 'SELAMAT, KAMU TERMASUK KLASIFIKASI MAHASISWA LULUS TEPAT WAKTU!!'
+            SEMESTER_2_PREDICTION = 'SELAMAT KAMU TERMASUK KLASIFIKASI MAHASISWA LULUS TEPAT WAKTU!'
             MOTIVASI = (
                 ' Kamu telah melalui lebih dari 20 sks dengan baik. Pertahankan dan tingkatkan kembali nilai-nilai di semester kedepan. '
                 'Kamu bisa mengambil lebih dari 20 sks untuk semester 3. Menjadi mahasiswa tidaklah mudah, namun semua bisa dilalui oleh mereka yang semangatnya yang tak akan goyah')
@@ -206,7 +206,7 @@ if (selected == 'SEMESTER 3'):
 
     # Creating a button for prediction
 
-    if st.button('Klasifikasi Kelulusan'):
+    if st.button('KLASIFIKASI KELULUSAN'):
         if 'name' in st.session_state:
             st.write(f"Halo {st.session_state.name}!")
 
@@ -254,7 +254,7 @@ if (selected == 'SEMESTER 3'):
             img3 = Image.open('SYARAT NILAI.jpg')
             st.image(img3, use_column_width=True) 
         else:
-            SEMESTER_3_PREDICTION = 'SELAMAT, KAMU TERMASUK KLASIFIKASI MAHASISWA LULUS TEPAT WAKTU!!'
+            SEMESTER_3_PREDICTION = 'SELAMAT KAMU TERMASUK KLASIFIKASI MAHASISWA LULUS TEPAT WAKTU!'
             MOTIVASI = (
                 ' Kamu telah melalui lebih dari 20 sks dengan baik. Pertahankan dan tingkatkan kembali nilai-nilai di semester kedepan. '
                 'Kamu bisa mengambil lebih dari 20 sks untuk semester 4. "Jika kita terus melakukan apa yang kita lakukan, kita juga terus akan mendapatkan apa yang kita dapatkan"')
@@ -266,7 +266,7 @@ if (selected == 'SEMESTER 3'):
 if (selected == 'SEMESTER 4'):
 
     # Page title
-    st.title('Klasifikasi Kelulusan Mahasiswa SEMESTER 4 Teknik Industri UNTIRTA')
+    st.title('Klasifikasi Kelulusan Mahasiswa Semester 4 Teknik Industri UNTIRTA')
 
     Fisika_Dasar_1 = st.selectbox('Fisika Dasar 1', ('4.00','3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
     Kalkulus_1 = st.selectbox('Kalkulus 1', ('4.00','3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
@@ -305,7 +305,7 @@ if (selected == 'SEMESTER 4'):
 
     # Creating a button for prediction
 
-    if st.button('Klasifikasi Kelulusan'):
+    if st.button('KLASIFIKASI KELULUSAN'):
         if 'name' in st.session_state:
             st.write(f"Halo {st.session_state.name}!")
 
@@ -361,7 +361,7 @@ if (selected == 'SEMESTER 4'):
             st.image(img3, use_column_width=True) 
 
         else:
-            SEMESTER_4_PREDICTION = 'SELAMAT, KAMU TERMASUK KLASIFIKASI MAHASISWA LULUS TEPAT WAKTU!!'
+            SEMESTER_4_PREDICTION = 'SELAMAT KAMU TERMASUK MAHASISWA LULUS TEPAT WAKTU!'
             MOTIVASI = (
                 ' Kamu telah melalui lebih dari 20 sks dengan baik. Pertahankan dan tingkatkan kembali nilai-nilai di semester kedepan. '
                 'Kamu bisa mengambil lebih dari 20 sks untuk semester 5. '
@@ -374,7 +374,7 @@ if (selected == 'SEMESTER 4'):
 if (selected == 'SEMESTER 5'):
 
     # Page title
-    st.title('Klasifikasi Kelulusan Mahasiswa SEMESTER 5 Teknik Industri UNTIRTA')
+    st.title('Klasifikasi Kelulusan Mahasiswa Semester 5 Teknik Industri UNTIRTA')
 
     Fisika_Dasar_1 = st.selectbox('Fisika Dasar 1', ('4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
     Kalkulus_1 = st.selectbox('Kalkulus 1', ('4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
@@ -421,7 +421,7 @@ if (selected == 'SEMESTER 5'):
 
     # Creating a button for prediction
 
-    if st.button('Klasifikasi Kelulusan'):
+    if st.button('KLASIFIKASI KELULUSAN'):
         if 'name' in st.session_state:
             st.write(f"Halo {st.session_state.name}!")
 
@@ -489,7 +489,7 @@ if (selected == 'SEMESTER 5'):
             img3 = Image.open('SYARAT NILAI.jpg')
             st.image(img3, use_column_width=True) 
         else:
-            SEMESTER_5_PREDICTION = 'SELAMAT, KAMU TERMASUK KLASIFIKASI MAHASISWA LULUS TEPAT WAKTU!!'
+            SEMESTER_5_PREDICTION = 'SELAMAT KAMU TERMASUK MAHASISWA LULUS TEPAT WAKTU!'
             MOTIVASI = (
                 ' Kamu telah melalui lebih dari 20 sks dengan baik. Pertahankan dan tingkatkan kembali nilai-nilai di semester kedepan. '
                 'Kamu bisa mengambil lebih dari 20 sks untuk semester 6. '
@@ -502,7 +502,7 @@ if (selected == 'SEMESTER 5'):
 if (selected == 'SEMESTER 6'):
 
     # Page title
-    st.title('Klasifikasi Kelulusan Mahasiswa SEMESTER 6 Teknik Industri UNTIRTA')
+    st.title('Klasifikasi Kelulusan Mahasiswa Semester 6 Teknik Industri UNTIRTA')
 
     Fisika_Dasar_1 = st.selectbox('Fisika Dasar 1',
                                   ('4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
@@ -590,7 +590,7 @@ if (selected == 'SEMESTER 6'):
 
     # Creating a button for prediction
 
-    if st.button('Klasifikasi Kelulusan'):
+    if st.button('KLASIFIKASI KELULUSAN'):
         if 'name' in st.session_state:
             st.write(f"Halo {st.session_state.name}!")
 
@@ -664,7 +664,7 @@ if (selected == 'SEMESTER 6'):
             st.image(img3, use_column_width=True) 
             
         else:
-            SEMESTER_6_PREDICTION = 'SELAMAT, KAMU TERMASUK KLASIFIKASI MAHASISWA LULUS TEPAT WAKTU!!'
+            SEMESTER_6_PREDICTION = 'SELAMAT KAMU TERMASUK KLASIFIKASI MAHASISWA LULUS TEPAT WAKTU!'
             MOTIVASI = (
                 ' Kamu telah melalui lebih dari 20 sks dengan baik. Pertahankan dan tingkatkan kembali nilai-nilai di semester kedepan. '
                 'Pikirkan dengan matang, apa topik yang akan kamu teliti di skripsi. '
@@ -677,7 +677,7 @@ if (selected == 'SEMESTER 6'):
 if (selected == 'SEMESTER 7'):
 
     # Page title
-    st.title('Klasifikasi Kelulusan Mahasiswa SEMESTER 7 Teknik Industri UNTIRTA')
+    st.title('Klasifikasi Kelulusan Mahasiswa Semester 7 Teknik Industri UNTIRTA')
 
     Fisika_Dasar_1 = st.selectbox('Fisika Dasar 1',
                                   ('4.00', '3.75', '3.50', '3.00', '2.75', '2.50', '2.00', '1.00', '0.00'))
@@ -769,7 +769,7 @@ if (selected == 'SEMESTER 7'):
 
     # Creating a button for prediction
 
-    if st.button('Klasifikasi Kelulusan'):
+    if st.button('KLASIFIKASI KELULUSAN'):
         if 'name' in st.session_state:
             st.write(f"Halo {st.session_state.name}!")
 
@@ -835,16 +835,15 @@ if (selected == 'SEMESTER 7'):
               Praktikum_Terintegarasi, Kerja_Praktek, Ekonomika_dan_Ekonomi_Teknik,
               Perancangan_dan_Manajemen_Organisasi_Industri, Metodologi_Penelitian, Perancangan_Sistem_Terpadu]])
 
-        if SEMESTER_7_prediction[0] == 0:
+        if SEMESTER_7_prediction[0] == 1:
             SEMESTER_7_PREDICTION = 'KAMU TERMASUK KLASIFIKASI MAHASISWA LULUS TIDAK TEPAT WAKTU!'
             MOTIVASI = (
                 ' Mungkin akan sedikit terlambat, tapi pelan pelan kamu pasti bisa mencapai titik akhir.'
                 '"Mau tidak mau kita harus segera menyelesaikan kuliah agar tidak memberatkan biaya"')
-            img3 = Image.open('SYARAT NILAI.jpg')
-            st.image(img3, use_column_width=True) 
+
 
         else:
-            SEMESTER_7_PREDICTION = 'SELAMAT, KAMU TERMASUK KLASIFIKASI MAHASISWA LULUS TEPAT WAKTU!!'
+            SEMESTER_7_PREDICTION = 'SELAMAT KAMU TERMASUK KLASIFIKASI MAHASISWA LULUS TEPAT WAKTU!'
             MOTIVASI = (
                 ' Sudah hampir sedikit lagi selesai. Bukalah Laptop dan Kerjakan Skripsimu.'
                 'Akhir yang indah dengan gelar di belakang nama, siap menantimu!!')
